@@ -8,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @RestController
 @RequestMapping("/app/v1")
@@ -27,37 +25,39 @@ public class UserController {
         UserDto userDto1 = userService.saveUser(userDto);
         return new ResponseEntity<>(userDto1, HttpStatus.CREATED);
     }
-    @GetMapping("/read")
-    public ResponseEntity<List<User>> readAllUser(){
-       List<User> users= userService.readAllUser();
 
-        return new ResponseEntity<>(users,HttpStatus.OK);
+    @GetMapping("/read")
+    public ResponseEntity<List<User>> readAllUser() {
+        List<User> users = userService.readAllUser();
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
 
     }
 
     @PatchMapping("/update")
-    public  ResponseEntity<String> updateEmailById(@RequestParam Long id,@RequestBody String email){
+    public ResponseEntity<String> updateEmailById(@RequestParam Long id, @RequestBody String email) {
         Long startTime = System.nanoTime();
-        User user= userService.updateEmailById(email,id);
+        User user = userService.updateEmailById(email, id);
         Long endTime = System.nanoTime();
-        System.out.println(endTime-startTime);
-        return  new ResponseEntity<>("Your "+email+" Updated",HttpStatus.FOUND);
+        System.out.println(endTime - startTime);
+        return new ResponseEntity<>("Your " + email + " Updated", HttpStatus.FOUND);
     }
 
 
     @PutMapping("/updated")
-    public  ResponseEntity<String> updatedEmailById(@RequestBody User user) throws ResourceNotFound {
+    public ResponseEntity<String> updatedEmailById(@RequestBody User user) throws ResourceNotFound {
         Long startTime1 = System.nanoTime();
-        User users= userService.updatedEmailById(user).getBody();
+        User users = userService.updatedEmailById(user).getBody();
         Long endTime1 = System.nanoTime();
-        System.out.println(endTime1-startTime1);
-        return  new ResponseEntity<>("Your "+users.getEmail()+" Updated",HttpStatus.FOUND);
+        System.out.println(endTime1 - startTime1);
+        return new ResponseEntity<>("Your " + users.getEmail() + " Updated", HttpStatus.FOUND);
 
     }
+
     @GetMapping("/byid")
     public ResponseEntity<User> getById(@RequestParam Long id) throws Exception {
-       User user= userService.findByUserId(id).getBody();
+        User user = userService.findByUserId(id).getBody();
 
-        return new ResponseEntity<>(user,HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

@@ -7,6 +7,12 @@ public class ErrorDetails {
     private Date date;
     private String description;
 
+    public ErrorDetails(String name, Date date, String description) {
+        this.name = name;
+        this.date = date;
+        this.description = description;
+    }
+
     public String getName() {
         return name;
     }
@@ -17,11 +23,5 @@ public class ErrorDetails {
 
     public String getDescription() {
         return description;
-    }
-
-    public ErrorDetails(String name, Date date, String description) {
-        this.name = name;
-        this.date = date;
-        this.description = description;
     }
 }

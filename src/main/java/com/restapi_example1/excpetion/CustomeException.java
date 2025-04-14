@@ -11,13 +11,13 @@ import java.util.Date;
 @ControllerAdvice
 public class CustomeException {
 
-   @ExceptionHandler(ResourceNotFound.class)
-    public ResponseEntity<?> custom(Exception e, WebRequest r){
-      ErrorDetails errorDetails = new ErrorDetails(
-              e.getMessage(),
-              new Date(System.currentTimeMillis()),
-              r.getDescription(true)
-      );
-       return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
-   }
+    @ExceptionHandler(ResourceNotFound.class)
+    public ResponseEntity<?> custom(Exception e, WebRequest r) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                e.getMessage(),
+                new Date(System.currentTimeMillis()),
+                r.getDescription(true)
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
 }
